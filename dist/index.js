@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 import crypto from "crypto";
 import axios from "axios";
 import { z } from "zod";
-import { createInvoice, getInvoice } from "./btcpay";
+import { createInvoice, getInvoice } from "./btcpay.js";
 // Keep minimal state; you likely want Postgres/Redis in prod
 const invoices = new Map();
 const { PORT = "8081", ALLOWED_ORIGIN, WEBHOOK_SECRET, DJANGO_CALLBACK_URL, DJANGO_CALLBACK_TOKEN } = process.env;

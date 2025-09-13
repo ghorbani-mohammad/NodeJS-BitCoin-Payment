@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 import crypto from "crypto";
 import axios from "axios";
 import { z } from "zod";
-import { createInvoice, getInvoice } from "./btcpay";
+import { createInvoice, getInvoice } from "./btcpay.js";
 import type { BtcpayWebhookEvent, CreateInvoiceBody } from "./types";
 
 // Keep minimal state; you likely want Postgres/Redis in prod
