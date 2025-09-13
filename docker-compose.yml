@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  crypto-payments:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8081:8081'
+    environment:
+      - NODE_ENV=production
+      - PORT=8081
+      # BTCPay Server Configuration
+      - BTCPAY_BASE_URL=${BTCPAY_BASE_URL}
+      - BTCPAY_API_KEY=${BTCPAY_API_KEY}
+      - BTCPAY_STORE_ID=${BTCPAY_STORE_ID}
+      # Security
+      - WEBHOOK_SECRET=${WEBHOOK_SECRET}
+      - ALLOWED_ORIGIN=${ALLOWED_ORIGIN}
+      # Django Integration
+      - DJANGO_CALLBACK_URL=${DJANGO_CALLBACK_URL}
+      - DJANGO_CALLBACK_TOKEN=${DJANGO_CALLBACK_TOKEN}
+    volumes:
+      # Optional: Mount logs directory for persistence
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'node', '-e', "require('http').get('http://localhost:8081/healthz', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - crypto-payments-network
+
+  # Optional: Add Redis for better state management in production
+  # redis:
+  #   image: redis:7-alpine
+  #   restart: unless-stopped
+  #   volumes:
+  #     - redis_data:/data
+  #   networks:
+  #     - crypto-payments-network
+
+networks:
+  crypto-payments-network:
+    driver: bridge
+
+# volumes:
+#   redis_data:
