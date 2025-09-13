@@ -5,7 +5,6 @@ services:
     ports:
       - 8038:8038
     environment:
-      - NODE_ENV=production
       - PORT=8038
       # BTCPay Server Configuration
       - BTCPAY_BASE_URL=${BTCPAY_BASE_URL}
