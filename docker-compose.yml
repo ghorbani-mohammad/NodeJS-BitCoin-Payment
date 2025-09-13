@@ -1,15 +1,12 @@
-version: '3.8'
 
 services:
-  crypto-payments:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  btc-payment:
+    build: .
     ports:
-      - '8081:8081'
+      - 8038:8038
     environment:
       - NODE_ENV=production
-      - PORT=8081
+      - PORT=8038
       # BTCPay Server Configuration
       - BTCPAY_BASE_URL=${BTCPAY_BASE_URL}
       - BTCPAY_API_KEY=${BTCPAY_API_KEY}
@@ -23,15 +20,18 @@ services:
     volumes:
       # Optional: Mount logs directory for persistence
       - ./logs:/app/logs
+      # Mount static files directory for nginx
+      - ./static:/app/static
+      - ./media:/app/media
     restart: unless-stopped
     healthcheck:
-      test: ['CMD', 'node', '-e', "require('http').get('http://localhost:8081/healthz', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
+      test: ['CMD', 'node', '-e', "require('http').get('http://localhost:8038/healthz', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
-    networks:
-      - crypto-payments-network
+    # networks:
+      # - crypto-payments-network
 
   # Optional: Add Redis for better state management in production
   # redis:
@@ -42,9 +42,9 @@ services:
   #   networks:
   #     - crypto-payments-network
 
-networks:
-  crypto-payments-network:
-    driver: bridge
+# networks:
+#   crypto-payments-network:
+#     driver: bridge
 
 # volumes:
-#   redis_data:
+  # redis_data:
