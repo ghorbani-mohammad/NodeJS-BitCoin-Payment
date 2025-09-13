@@ -9,7 +9,7 @@ import { z } from "zod";
 import { createInvoice, getInvoice } from "./btcpay.js";
 // Keep minimal state; you likely want Postgres/Redis in prod
 const invoices = new Map();
-const { PORT = "8081", ALLOWED_ORIGIN, WEBHOOK_SECRET, DJANGO_CALLBACK_URL, DJANGO_CALLBACK_TOKEN } = process.env;
+const { PORT = "8038", ALLOWED_ORIGIN, WEBHOOK_SECRET, DJANGO_CALLBACK_URL, DJANGO_CALLBACK_TOKEN } = process.env;
 if (!WEBHOOK_SECRET || !DJANGO_CALLBACK_URL || !DJANGO_CALLBACK_TOKEN) {
     throw new Error("WEBHOOK_SECRET, DJANGO_CALLBACK_URL, DJANGO_CALLBACK_TOKEN are required");
 }

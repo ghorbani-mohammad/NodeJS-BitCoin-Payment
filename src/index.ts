@@ -13,7 +13,7 @@ import type { BtcpayWebhookEvent, CreateInvoiceBody } from "./types";
 const invoices = new Map<string, { orderId: string; status: string }>();
 
 const {
-  PORT = "8081",
+  PORT = "8038",
   ALLOWED_ORIGIN,
   WEBHOOK_SECRET,
   DJANGO_CALLBACK_URL,

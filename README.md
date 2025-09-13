@@ -116,7 +116,6 @@ docker run -d \
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `PORT` | Server port | No (default: 8081) |
 | `BTCPAY_BASE_URL` | BTCPay Server URL | Yes |
 | `BTCPAY_API_KEY` | BTCPay API key | Yes |
 | `BTCPAY_STORE_ID` | BTCPay Store ID | Yes |
