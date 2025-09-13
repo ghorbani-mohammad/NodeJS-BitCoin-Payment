@@ -1,4 +1,4 @@
-# NodeJS Coin Payment Service
+# NodeJS BitCoin Payment Service
 
 A secure cryptocurrency payment service built with Node.js, TypeScript, and BTCPay Server integration. This service handles invoice creation, payment processing, and webhook notifications for crypto payments.
 
